@@ -303,9 +303,11 @@ int LinxWiringDevice::PwmSetDutyCycle(unsigned char numChans, unsigned char* cha
 {
   for (int i = 0; i < numChans; i++)
   {
+    pinMode(channels[i],OUTPUT);
+    ledcAttachPin(channels[i], channels[i]);
+    ledcSetup(channels[i], 12000, 8);
     ledcWrite(channels[i], values[i]);
   }
-
   return L_OK;
 }
 
